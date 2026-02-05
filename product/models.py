@@ -1,0 +1,33 @@
+from django.db import models
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Status(models.Model):
+    class StatusChoices(models.TextChoices):
+        BISA_DIJUAL = "bisa dijual", "Bisa Dijual"
+        TIDAK_BISA_DIJUAL = "tidak bisa dijual", "Tidak Bisa Dijual"
+
+    name = models.CharField(max_length=50, choices=StatusChoices.choices, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
+
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
