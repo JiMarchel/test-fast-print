@@ -1,6 +1,4 @@
-# Fast Print
-
-Aplikasi product management dengan Django + HTMX + DaisyUI.
+Ini adalah sebuah tes project dari suatu company, disini saya disuruh membuat applikasi product management, saya kerjakan dengan Django + HTMX + DaisyUI.
 
 ## Tech Stack
 
