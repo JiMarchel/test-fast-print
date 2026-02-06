@@ -1,0 +1,51 @@
+<form
+  hx-post="{% url 'product_update' product.id %}"
+  hx-target="#modal-content"
+  hx-swap="innerHTML"
+  class="space-y-4"
+>
+  {% csrf_token %}
+
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">{{ form.name.label }}</span>
+    </label>
+    {{ form.name }} {% if form.name.errors %}
+    <span class="text-error text-sm">{{ form.name.errors.0 }}</span>
+    {% endif %}
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">{{ form.price.label }}</span>
+    </label>
+    {{ form.price }} {% if form.price.errors %}
+    <span class="text-error text-sm">{{ form.price.errors.0 }}</span>
+    {% endif %}
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">{{ form.category.label }}</span>
+    </label>
+    {{ form.category }} {% if form.category.errors %}
+    <span class="text-error text-sm">{{ form.category.errors.0 }}</span>
+    {% endif %}
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">{{ form.status.label }}</span>
+    </label>
+    {{ form.status }} {% if form.status.errors %}
+    <span class="text-error text-sm">{{ form.status.errors.0 }}</span>
+    {% endif %}
+  </div>
+
+  <div class="modal-action">
+    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="button" class="btn" onclick="product_modal.close()">
+      Batal
+    </button>
+  </div>
+</form>
