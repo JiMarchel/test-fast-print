@@ -1,0 +1,19 @@
+<h3 class="text-lg font-bold">Delete Product</h3>
+<p class="py-4">
+  Anda yakin akan menghapus <strong>{{ product.name }}</strong>?
+</p>
+
+<div class="modal-action">
+  <button
+    class="btn btn-error"
+    hx-delete="{% url 'product_delete' product.id %}"
+    hx-target="#table-container"
+    hx-swap="outerHTML"
+    onclick="delete_modal.closeModal()"
+  >
+    Ya, Hapus
+  </button>
+  <form method="dialog">
+    <button class="btn">Batal</button>
+  </form>
+</div>
