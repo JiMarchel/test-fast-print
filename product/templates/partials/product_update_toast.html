@@ -1,0 +1,27 @@
+<div id="toast-container" hx-swap-oob="beforeend:#toast-container">
+  <div class="alert alert-success" id="toast-update">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 shrink-0 stroke-current"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+    <span>Produk berhasil diupdate!</span>
+  </div>
+  <script>
+    (function () {
+      document.getElementById("product_modal").close();
+      setTimeout(function () {
+        const toast = document.getElementById("toast-update");
+        if (toast) toast.remove();
+      }, 3000);
+    })();
+  </script>
+</div>
