@@ -60,7 +60,7 @@ uv sync
 uv run manage.py migrate
 ```
 
-### 5. Seed Data Produk (Optional)
+### 5. Seed Data Produk
 
 Fetch data produk dari API eksternal:
 
