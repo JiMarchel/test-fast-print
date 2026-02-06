@@ -19,7 +19,7 @@ Ini adalah sebuah tes project dari suatu company, disini saya disuruh membuat ap
 
 ```bash
 git clone https://github.com/JiMarchel/test-fast-print.git
-cd fast_print
+cd test_fast_print
 ```
 
 ### 2. Jalankan Database
