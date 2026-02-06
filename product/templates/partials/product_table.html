@@ -1,0 +1,91 @@
+<div id="table-container" hx-swap-oob="true">
+  {% if products %}
+  <table class="table table-zebra">
+    <thead>
+      <tr>
+        <th>Nama Produk</th>
+        <th>Harga</th>
+        <th>Kategori</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>Rp {{ product.price|floatformat:0 }}</td>
+        <td>{{ product.category.name }}</td>
+        <td>{{ product.status.name }}</td>
+        <td>
+          <details class="dropdown dropdown-end">
+            <summary class="btn m-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-ellipsis-icon lucide-ellipsis"
+              >
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="19" cy="12" r="1" />
+                <circle cx="5" cy="12" r="1" />
+              </svg>
+            </summary>
+            <ul
+              class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm space-y-1"
+            >
+              <li>
+                <button
+                  class="btn btn-success btn-sm"
+                  hx-get="{% url 'product_edit_form' product.id %}"
+                  hx-target="#modal-content"
+                  hx-swap="innerHTML"
+                  onclick="product_modal.showModal()"
+                >
+                  Update
+                </button>
+              </li>
+              <li>
+                <button
+                  class="btn btn-error btn-sm"
+                  hx-get="{% url 'product_delete_confirm' product.id %}"
+                  hx-target="#delete-modal-content"
+                  hx-swap="innerHTML"
+                  onclick="delete_modal.showModal()"
+                >
+                  Delete
+                </button>
+              </li>
+            </ul>
+          </details>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>Tidak ada produk yang tersedia.</p>
+  {% endif %}
+</div>
+
+<dialog id="delete_modal" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <div id="delete-modal-content">
+      <span class="loading loading-spinner loading-lg"></span>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
