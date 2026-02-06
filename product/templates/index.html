@@ -1,35 +1,63 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="night">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fast Print</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
+      integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body>
-    <h1>List of products</h1>
-    {% if products %}
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Nama Produk</th>
-          <th>Harga</th>
-          <th>Kategori</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for product in products %}
-        <tr>
-          <td>{{ product.name }}</td>
-          <td>Rp {{ product.price|floatformat:0 }}</td>
-          <td>{{ product.category.name }}</td>
-          <td>{{ product.status.name }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <p>Tidak ada produk yang tersedia.</p>
-    {% endif %}
+
+  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <div id="toast-container" class="toast toast-top toast-center z-50"></div>
+
+    <main class="py-10 px-20">
+      <div class="mb-4">
+        <button
+          class="btn btn-primary"
+          hx-get="{% url 'product_form' %}"
+          hx-target="#modal-content"
+          hx-swap="innerHTML"
+          onclick="product_modal.showModal()"
+        >
+          + Tambah Produk
+        </button>
+      </div>
+
+      <dialog id="product_modal" class="modal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button
+              class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </button>
+          </form>
+          <h3 class="text-lg font-bold mb-4">Tambah Produk Baru</h3>
+          <div id="modal-content">
+            <span class="loading loading-spinner loading-lg"></span>
+          </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+
+      {% include "partials/product_table.html" %}
+    </main>
   </body>
 </html>
