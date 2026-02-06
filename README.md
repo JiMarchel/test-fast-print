@@ -18,7 +18,7 @@ Ini adalah sebuah tes project dari suatu company, disini saya disuruh membuat ap
 ### 1. Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/JiMarchel/test-fast-print.git
 cd fast_print
 ```
 
